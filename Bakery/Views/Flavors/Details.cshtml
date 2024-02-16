@@ -1,0 +1,31 @@
+@using Bakery.Models
+@model Bakery.Models.Flavor
+
+<h2>Falvor Info</h2>
+<hr />
+<h3>@Html.DisplayFor(model => model.Name)</h3>
+
+@if (@Model.JoinEntities.Count == 0)
+{
+    <p>No treats come in this flavor!</p>
+}
+else
+{
+    <h4>These treats are @Model.Name:</h4>
+    <ul>
+        @foreach (FlavorTreat join in Model.JoinEntities)
+        {
+            <li>@join.Treat.Name</li>
+            @using (Html.BeginForm("DeleteJoin", "Flavors"))
+            {
+                @Html.Hidden("joinId", @join.FlavorTreatId)
+                <input type="submit" value="Remove treat" />
+            }
+        }
+    </ul>
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Add a treat", "AddTreat", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Delete flavor", "Delete", new { id = Model.FlavorId })</p>

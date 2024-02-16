@@ -26,9 +26,36 @@ public class FlavorsController : Controller
         return View(model);
     }
 
+    [Authorize]
     public ActionResult Create()
     {
         return View();
     }
 
+    [HttpPost]
+    public async Task<ActionResult> Create(Flavor flav)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(flav);
+        }
+        else
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            flav.User = currentUser;
+            _db.Flavors.Add(flav);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
+
+    public ActionResult Details(int id)
+    {
+        Flavor flav = _db.Flavors
+            .Include(flav => flav.JoinEntities)
+            .ThenInclude(join => join.Treat)
+            .FirstOrDefault(flav => flav.FlavorId == id);
+        return View(flav);
+    }
 }
