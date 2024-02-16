@@ -1,0 +1,18 @@
+@model Bakery.Models.Flavor
+
+
+<h2>Add a new flavor</h2>
+
+<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+{
+    <div class=form-layout>
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name)
+
+        <input class="form-button" type="submit" value="Add flavor" />
+    </div>
+}
+
+@Html.ActionLink("Show all flavors", "Index")
