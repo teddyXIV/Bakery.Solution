@@ -54,7 +54,7 @@ public class TreatsController : Controller
     {
         Treat treat = _db.Treats
             .Include(treat => treat.JoinEntities)
-            .ThenInclude(join => join.Treat)
+            .ThenInclude(join => join.Flavor)
             .FirstOrDefault(treat => treat.TreatId == id);
         return View(treat);
     }
@@ -107,12 +107,12 @@ public class TreatsController : Controller
 
     [Authorize]
     [HttpPost]
-    public ActionResult DeleteJoin(int joinId)
+    public ActionResult DeleteJoin(int joinId, int treatId)
     {
         FlavorTreat joinEntry = _db.FlavorTreats.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
         _db.FlavorTreats.Remove(joinEntry);
         _db.SaveChanges();
-        return RedirectToAction("Index");
+        return RedirectToAction("Details", new { id = treatId });
     }
 
 }

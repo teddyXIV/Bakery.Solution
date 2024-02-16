@@ -19,6 +19,7 @@ else
             @using (Html.BeginForm("DeleteJoin", "Flavors"))
             {
                 @Html.Hidden("joinId", @join.FlavorTreatId)
+                @Html.Hidden("flavId", @Model.FlavorId)
                 <input type="submit" value="Remove treat" />
             }
         }

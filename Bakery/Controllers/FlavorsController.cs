@@ -107,11 +107,11 @@ public class FlavorsController : Controller
 
     [Authorize]
     [HttpPost]
-    public ActionResult DeleteJoin(int joinId)
+    public ActionResult DeleteJoin(int joinId, int flavId)
     {
         FlavorTreat joinEntry = _db.FlavorTreats.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
         _db.FlavorTreats.Remove(joinEntry);
         _db.SaveChanges();
-        return RedirectToAction("Index");
+        return RedirectToAction("Details", new { id = flavId });
     }
 }
