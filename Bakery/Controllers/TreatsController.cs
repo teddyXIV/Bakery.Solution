@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using Bakery.Models;
 
 namespace Bakery.Controllers;
 
@@ -16,6 +17,6 @@ public class TreatsController : Controller
     public TreatsController(UserManager<ApplicationUser> userManager, BakeryContext db)
     {
         _userManager = userManager;
-        -db = db;
+        _db = db;
     }
 }

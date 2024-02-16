@@ -1,0 +1,17 @@
+@using Bakery.Models;
+
+
+<h2>Flavors</h2>
+@Html.ActionLink("Add a new flavor", "Create")
+
+
+@if (@Model.Count == 0)
+{
+    <h4>No flavors have been added.</h4>
+}
+
+
+@foreach (Flavor f in Model)
+{
+    @Html.ActionLink($"{f.Name}", "Details", new { id = f.FlavorId })
+}
