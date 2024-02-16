@@ -58,4 +58,11 @@ public class FlavorsController : Controller
             .FirstOrDefault(flav => flav.FlavorId == id);
         return View(flav);
     }
+
+    [Authorize]
+    public ActionResult Edit(int id)
+    {
+        Flavor flav = _db.Flavors.FirstOrDefault(flav => flav.FlavorId == id);
+        return View(flav);
+    }
 }
