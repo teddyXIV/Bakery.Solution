@@ -19,8 +19,16 @@ public class HomeController : Controller
     }
 
     [HttpGet("/")]
-    public async Task<ActionResult> Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        ViewBag.User = await _userManager.GetUserAsync(HttpContext.User);
+        Flavor[] flavs = _db.Flavors.ToArray();
+        Treat[] treats = _db.Treats.ToArray();
+        Dictionary<string, object[]> model = new Dictionary<string, object[]>
+        {
+            { "flavors", flavs },
+            { "treats", treats }
+        };
+        return View(model);
     }
 }

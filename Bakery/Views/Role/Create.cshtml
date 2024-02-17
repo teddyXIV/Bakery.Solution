@@ -1,0 +1,8 @@
+<h2>Create Role</h2>
+
+@using (Html.BeginForm("Create", "Role"))
+{
+    @Html.Label("name", "name")
+    @Html.TextBox("name")
+    < input type="submit" value="Add role" />
+}

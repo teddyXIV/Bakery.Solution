@@ -33,7 +33,8 @@ public class AccountController : Controller
         }
         else
         {
-            ApplicationUser user = new ApplicationUser { UserName = model.Email };
+            ApplicationUser user = new ApplicationUser { UserName = model.Email, Alias = model.Alias };
+            Console.WriteLine($"Alias: {user.Alias}");
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
