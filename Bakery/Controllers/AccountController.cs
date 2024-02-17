@@ -33,8 +33,7 @@ public class AccountController : Controller
         }
         else
         {
-            ApplicationUser user = new ApplicationUser { UserName = model.Email, Alias = model.Alias };
-            Console.WriteLine($"Alias: {user.Alias}");
+            ApplicationUser user = new ApplicationUser { UserName = model.Name, Email = model.Email };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -65,18 +64,34 @@ public class AccountController : Controller
         }
         else
         {
-            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager
-               .PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
-            if (result.Succeeded)
+            ApplicationUser user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
             {
-                return RedirectToAction("Index", "Home");
+                await _signInManager.SignOutAsync();
+                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There is something wrong with your email or password. Please try again.");
+                    return View(model);
+                }
             }
-            else
-            {
-                ModelState.AddModelError("", "There is something wrong with your email or username. Please try again.");
-                return View(model);
-            }
+            // Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager
+            //    .PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+            // if (result.Succeeded)
+            // {
+            //     return RedirectToAction("Index", "Home");
+            // }
+            // else
+            // {
+            //     ModelState.AddModelError("", "There is something wrong with your email or password. Please try again.");
+            //     return View(model);
+            // }
         }
+        return View(model);
     }
 
     [HttpPost]

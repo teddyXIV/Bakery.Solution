@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bakery.Migrations
 {
     [DbContext(typeof(BakeryContext))]
-    [Migration("20240216222754_FixTreatsInContext")]
-    partial class FixTreatsInContext
+    [Migration("20240217222900_NewInitial")]
+    partial class NewInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,9 @@ namespace Bakery.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Alias")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()

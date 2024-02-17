@@ -11,7 +11,7 @@ public class RegisterViewModel
 
     [Required]
     [Display(Name = "User name")]
-    public string Alias { get; set; }
+    public string Name { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
