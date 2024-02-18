@@ -4,13 +4,13 @@
 @if (User.Identity.IsAuthenticated)
 {
     <p class="mt-3">Signed in as: @User.Identity.Name</p>
-
-    <ul>
-        @foreach (var claim in (User as ClaimsPrincipal).Claims)
-        {
-            <li>@claim.Type: @claim.Value</li>
-        }
-    </ul>
+    @*
+<ul>
+@foreach (var claim in (User as ClaimsPrincipal).Claims)
+{
+<li>@claim.Type: @claim.Value</li>
+}
+</ul> *@
 
 
     @using (Html.BeginForm("LogOff", "Account"))
@@ -26,3 +26,4 @@ else
 
 @Html.ActionLink("View flavors", "Index", "Flavors")
 @Html.ActionLink("View treats", "Index", "Treats")
+@Html.ActionLink("View orders", "Index", "Orders")

@@ -1,0 +1,19 @@
+@model Bakery.Models.Order
+
+<h2>Edit order</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Treat)
+    @Html.DropDownList("Treat")
+
+    @Html.LabelFor(model => model.Quantity)
+    @Html.EditorFor(model => model.Quantity)
+
+    @Html.LabelFor(model => model.Price)
+    @Html.EditorFor(model => model.Price)
+
+    <input type="submit" value="Update order" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>

@@ -3,6 +3,7 @@ using System;
 using Bakery.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bakery.Migrations
 {
     [DbContext(typeof(BakeryContext))]
-    partial class BakeryContextModelSnapshot : ModelSnapshot
+    [Migration("20240218002144_RemoveAliasAddOrderList")]
+    partial class RemoveAliasAddOrderList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,11 +132,8 @@ namespace Bakery.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<string>("Quantity")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Treat")
                         .HasColumnType("longtext");
@@ -146,7 +145,7 @@ namespace Bakery.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("Bakery.Models.Treat", b =>

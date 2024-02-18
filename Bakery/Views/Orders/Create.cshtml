@@ -1,0 +1,24 @@
+@model Bakery.Models.Order
+
+
+<h2>Place an order</h2>
+
+<p>@Html.ValidationMessageFor(model => model.Treat, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+{
+    <div class=form-layout>
+        @Html.LabelFor(model => model.Treat)
+        @Html.DropDownList("Treat")
+
+        @Html.LabelFor(model => model.Quantity)
+        @Html.TextBoxFor(model => model.Quantity)
+
+        @Html.LabelFor(model => model.Price)
+        @Html.TextBoxFor(model => model.Price)
+
+        <input type="submit" value="Place order" />
+    </div>
+}
+
+@Html.ActionLink("Show all treats", "Index")
