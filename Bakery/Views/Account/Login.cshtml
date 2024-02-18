@@ -2,6 +2,7 @@
 
 @model LoginViewModel
 
+
 <h2>Log in with your account</h2>
 <hr />
 
@@ -12,13 +13,15 @@
 
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
+    <div class="form-layout">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
 
-    @Html.LabelFor(m => m.Password)
-    @Html.EditorFor(m => m.Password)
+        @Html.LabelFor(m => m.Password)
+        @Html.EditorFor(m => m.Password)
 
-    <input type="submit" value="Log in" />
+        <input class="form-button" type="submit" value="Log in" />
+    </div>
 }
 
 <p>@Html.ActionLink("Register for an account", "Register")</p>

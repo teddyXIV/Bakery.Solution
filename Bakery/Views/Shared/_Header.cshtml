@@ -1,29 +1,38 @@
 @using Bakery.Models
 @using System.Security.Claims
 
-@if (User.Identity.IsAuthenticated)
-{
-    <p class="mt-3">Signed in as: @User.Identity.Name</p>
-    @*
-<ul>
-@foreach (var claim in (User as ClaimsPrincipal).Claims)
-{
-<li>@claim.Type: @claim.Value</li>
-}
-</ul> *@
+<div class="header">
+    <div class="logo">
+        <a href="/">
+            <img src="~/images/pblogo_noback.png" alt="Logo">
+        </a>
+    </div>
 
+    <div class="title">
+        <h1> Pierre's Bakery</h1>
+        <div class="nav-buttons">
+            @Html.ActionLink("View flavors", "Index", "Flavors")
+            @Html.ActionLink("View treats", "Index", "Treats")
+            @Html.ActionLink("View orders", "Index", "Orders")
+        </div>
+    </div>
 
-    @using (Html.BeginForm("LogOff", "Account"))
-    {
-        <button type="submit">Log out</button>
-    }
-}
-else
-{
-    @Html.ActionLink("Log in", "Login", "Account")
-    @Html.ActionLink("Create an account", "Register", "Account")
-}
+    <div class="account-buttons">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p class="mt-3">Signed in as: @User.Identity.Name</p>
 
-@Html.ActionLink("View flavors", "Index", "Flavors")
-@Html.ActionLink("View treats", "Index", "Treats")
-@Html.ActionLink("View orders", "Index", "Orders")
+            @using (Html.BeginForm("LogOff", "Account"))
+            {
+                <button class="alt-button" type="submit">Log out</button>
+            }
+        }
+        else
+        {
+            <div class="signed-out">
+                @Html.ActionLink("Log in", "Login", "Account")
+                @Html.ActionLink("Create an account", "Register", "Account")
+            </div>
+        }
+    </div>
+</div>

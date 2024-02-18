@@ -1,17 +1,20 @@
 @model Bakery.Models.Flavor
 
+
 <h2>Edit</h2>
 
 <h4>Edit @Model.Name</h4>
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(model => model.FlavorId)
+    <div class="form-layout">
+        @Html.HiddenFor(model => model.FlavorId)
 
-    @Html.LabelFor(model => model.Name)
-    @Html.EditorFor(model => model.Name)
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
 
-    <input type="submit" value="Save" />
+        <input class="form-button" type="submit" value="Save" />
+    </div>
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>

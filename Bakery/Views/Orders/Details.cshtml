@@ -1,12 +1,13 @@
 @using Bakery.Models
 @model Bakery.Models.Order
 
+
 <h2>Order Info</h2>
 <hr />
 
 <h3>Treat: @Model.Treat</h3>
 <h3>Quanitiy: @Model.Quantity</h3>
-<h3>Price: @Model.Price</h3>
+<h3>Price: $@Model.Price</h3>
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
 <p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.OrderId })</p>

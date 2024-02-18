@@ -1,0 +1,87 @@
+body {
+    background-color: #fff0d4;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    width: 25%;
+}
+
+.logo img {
+    width: 200px;
+}
+
+a img:hover {
+    transform: scale(1.05)
+}
+
+.title {
+    width: 50%;
+}
+
+.nav-buttons a {
+    margin: 10px;
+}
+
+.account-buttons {
+    width: 25%;
+    text-align: right;
+    padding-right: 15px;
+}
+
+.signed-out {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    padding: 25px;
+}
+
+.form-layout {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.form-button {
+    width: 33%;
+    margin: auto;
+    margin-top: 10px;
+    background-color: #EBE2FD;
+    border: 1px solid;
+}
+
+.alt-button {
+    border: 0;
+    color: #7F7EFF;
+    background-color: #fff0d4;
+}
+
+a {
+    color: #7F7EFF;
+    text-decoration: none;
+}
+
+.splash {
+    display: flex;
+    flex-direction: row;
+}
+
+.treat-index {
+    margin: auto;
+}
+
+.flav-index {
+    margin: auto;
+}
+
+ul {
+    list-style-type: none;
+}

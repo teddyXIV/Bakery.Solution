@@ -1,33 +1,33 @@
 @using Bakery.Models;
 
-<h1>Pierre's Bakery!</h1>
+<h2>Hello @ViewBag.User</h2>
 
-<hr />
-
-<h3>@ViewBag.User</h3>
-
-<h4>Treats</h4>
-@if (Model["treats"].Length == 0)
-{
-    <p>No treats have been added yet!</p>
-}
-<ul>
-    @foreach (Treat t in Model["treats"])
-    {
-        <li>@Html.ActionLink(@t.Name, "Details", "Treats", new { id = @t.TreatId })</li>
-    }
-</ul>
-
-<h4>Flavors</h4>
-@if (Model["flavors"].Length == 0)
-{
-    <p>No flavors have been added yet!</p>
-}
-<ul>
-    @foreach (Flavor f in Model["flavors"])
-    {
-        <li>@Html.ActionLink(@f.Name, "Details", "Flavors", new { id = @f.FlavorId })</li>
-    }
-</ul>
-
+<div class="splash">
+    <div class="treat-index">
+        <h4>Treats</h4>
+        @if (Model["treats"].Length == 0)
+        {
+            <p>No treats have been added yet!</p>
+        }
+        <ul>
+            @foreach (Treat t in Model["treats"])
+            {
+                <li>@Html.ActionLink(@t.Name, "Details", "Treats", new { id = @t.TreatId })</li>
+            }
+        </ul>
+    </div>
+    <div class="flav-index">
+        <h4>Flavors</h4>
+        @if (Model["flavors"].Length == 0)
+        {
+            <p>No flavors have been added yet!</p>
+        }
+        <ul>
+            @foreach (Flavor f in Model["flavors"])
+            {
+                <li>@Html.ActionLink(@f.Name, "Details", "Flavors", new { id = @f.FlavorId })</li>
+            }
+        </ul>
+    </div>
+</div>
 <hr />

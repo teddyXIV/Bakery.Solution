@@ -2,7 +2,6 @@
 
 
 <h2>Orders</h2>
-@Html.ActionLink("Add a new order", "Create")
 
 
 @if (@Model.Count == 0)
@@ -10,8 +9,11 @@
     <h4>No orders have been placed on your account.</h4>
 }
 
+<ul>
+    @foreach (Order o in Model)
+    {
+        <li>@Html.ActionLink($"{o.Treat}s", "Details", new { id = o.OrderId })</li>
+    }
+</ul>
 
-@foreach (Order o in Model)
-{
-    @Html.ActionLink($"{o.Treat}s", "Details", new { id = o.OrderId })
-}
+@Html.ActionLink("Add a new order", "Create")
