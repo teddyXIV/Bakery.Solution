@@ -1,15 +1,18 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Bakery.Models;
 
 namespace Identity.Controllers;
 
 public class RoleController : Controller
 {
     private RoleManager<IdentityRole> roleManager;
-    public RoleController(RoleManager<IdentityRole> roleMgr)
+    private UserManager<ApplicationUser> userManager;
+    public RoleController(RoleManager<IdentityRole> roleMgr, UserManager<ApplicationUser> userMrg)
     {
         roleManager = roleMgr;
+        userManager = userMrg;
     }
 
     public ViewResult Index() => View(roleManager.Roles);
@@ -20,19 +23,58 @@ public class RoleController : Controller
             ModelState.AddModelError("", error.Description);
     }
 
-    public IActionResult Create() => View();
+    public async Task<IActionResult> Update(string id)
+    {
+        IdentityRole role = await roleManager.FindByIdAsync(id);
+        List<ApplicationUser> members = new List<ApplicationUser>();
+        List<ApplicationUser> nonMembers = new List<ApplicationUser>();
+
+        var allUsers = userManager.Users.ToList();
+
+        foreach (ApplicationUser user in allUsers)
+        {
+            var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
+            list.Add(user);
+        }
+        return View(new RoleEdit
+        {
+            Role = role,
+            Members = members,
+            NonMembers = nonMembers
+        });
+    }
 
     [HttpPost]
-    public async Task<IActionResult> Create([Required] string name)
+    public async Task<IActionResult> Update(RoleModification model)
     {
+        IdentityResult result;
         if (ModelState.IsValid)
         {
-            IdentityResult result = await roleManager.CreateAsync(new IdentityRole(name));
-            if (result.Succeeded)
-                return RedirectToAction("Index");
-            else
-                Errors(result);
+            foreach (string userId in model.AddIds ?? new string[] { })
+            {
+                ApplicationUser user = await userManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    result = await userManager.AddToRoleAsync(user, model.RoleName);
+                    if (!result.Succeeded)
+                        Errors(result);
+                }
+            }
+            foreach (string userId in model.DeleteIds ?? new string[] { })
+            {
+                ApplicationUser user = await userManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    result = await userManager.RemoveFromRoleAsync(user, model.RoleName);
+                    if (!result.Succeeded)
+                        Errors(result);
+                }
+            }
         }
-        return View(name);
+
+        if (ModelState.IsValid)
+            return RedirectToAction("Index", "Home");
+        else
+            return await Update("1");
     }
 }
