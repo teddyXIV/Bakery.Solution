@@ -28,7 +28,10 @@ public class RoleController : Controller
         IdentityRole role = await roleManager.FindByIdAsync(id);
         List<ApplicationUser> members = new List<ApplicationUser>();
         List<ApplicationUser> nonMembers = new List<ApplicationUser>();
-        foreach (ApplicationUser user in userManager.Users)
+
+        var allUsers = userManager.Users.ToList();
+
+        foreach (ApplicationUser user in allUsers)
         {
             var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
             list.Add(user);
@@ -70,8 +73,8 @@ public class RoleController : Controller
         }
 
         if (ModelState.IsValid)
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         else
-            return await Update(model.RoleId);
+            return await Update("1");
     }
 }

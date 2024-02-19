@@ -15,8 +15,8 @@
     }
     else
     {
-        @Html.HiddenFor(m => m.Role.Name)
-        @Html.HiddenFor(m => m.Role.Id)
+        <input type="hidden" name="roleName" value="@Model.Role.Name" />
+        <input type="hidden" name="roleId" value="@Model.Role.Id" />
 
         @foreach (ApplicationUser user in Model.NonMembers)
         {
