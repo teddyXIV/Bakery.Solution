@@ -32,8 +32,8 @@ In order to create, edit, or delete flavors or orders, the user must be signed i
 
 * Clone this repository.
 * If needed, download and configure MySQL Workbench for your operating system by following the instructions in [this lesson.](https://full-time.learnhowtoprogram.com/c-and-net/getting-started-with-c/installing-and-configuring-mysql) 
-* Navigate to the production directory Factory.
-* Within the production directory "Factory", create a new file called `appsettings.json`.
+* Navigate to the production directory "Bakery".
+* Within the production directory "Bakery", create a new file called `appsettings.json`.
 * Within `appsettings.json`, put in the following code, replacing the `database`, `uid`, and `pwd` values with your own username and password for MySQL.
 ```json 
 {
