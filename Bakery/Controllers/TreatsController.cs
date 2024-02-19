@@ -32,6 +32,7 @@ public class TreatsController : Controller
         return View();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult> Create(Treat treat)
     {
@@ -66,6 +67,7 @@ public class TreatsController : Controller
         return View(treat);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public ActionResult Edit(Treat treat)
     {
@@ -74,7 +76,7 @@ public class TreatsController : Controller
         return RedirectToAction("Details", new { id = treat.TreatId });
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public ActionResult Delete(int id)
     {
@@ -91,6 +93,7 @@ public class TreatsController : Controller
         ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
         return View(treat);
     }
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public ActionResult AddFlavor(Treat treat, int flavorId)
     {
@@ -105,7 +108,7 @@ public class TreatsController : Controller
         return RedirectToAction("Details", new { id = treat.TreatId });
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public ActionResult DeleteJoin(int joinId, int treatId)
     {

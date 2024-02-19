@@ -32,6 +32,7 @@ public class FlavorsController : Controller
         return View();
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> Create(Flavor flav)
     {
@@ -66,6 +67,7 @@ public class FlavorsController : Controller
         return View(flav);
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult Edit(Flavor flav)
     {
@@ -91,6 +93,7 @@ public class FlavorsController : Controller
         ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
         return View(flav);
     }
+    [Authorize]
     [HttpPost]
     public ActionResult AddTreat(Flavor flav, int treatId)
     {
