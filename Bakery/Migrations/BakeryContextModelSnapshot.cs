@@ -137,6 +137,7 @@ namespace Bakery.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Treat")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
@@ -200,16 +201,9 @@ namespace Bakery.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "e5a82591-7abd-4f7f-84c8-27e666280e80",
+                            ConcurrencyStamp = "8ca78612-ddc7-4730-9b9e-cf9b27e0e4f0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            ConcurrencyStamp = "09cd5212-0a30-456e-872f-6d05c5c59dac",
-                            Name = "User",
-                            NormalizedName = "USER"
                         });
                 });
 

@@ -13,11 +13,10 @@ public class BakeryContext : IdentityDbContext<ApplicationUser>
     public BakeryContext(DbContextOptions options) : base(options) { }
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(builder); // Ensure to call base method if you're using Identity
+        base.OnModelCreating(builder);
 
         builder.Entity<IdentityRole>().HasData(
-            new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
-            new IdentityRole { Id = "2", Name = "User", NormalizedName = "USER" }
+            new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" }
         );
     }
 
