@@ -1,0 +1,47 @@
+@model Bakery.Models.RoleEdit
+@using Bakery.Models
+
+<h2>Update roles</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <input type="hidden" name="roleId" value="@Model.Role.Id" />
+    <h3>Add to @Model.Role.Name</h3>
+
+    @if (Model.NonMembers.Count() == 0)
+    {
+        <p>All users are admins</p>
+    }
+    else
+    {
+        @foreach (ApplicationUser user in Model.NonMembers)
+        {
+            <label>
+                <input type="checkbox" name="AddIds" value="@user.Id">
+                @user.UserName
+            </label>
+        }
+    }
+
+    <h3>Remove from @Model.Role.Name</h3>
+
+    @if (Model.Members.Count() == 0)
+    {
+        <p>No users are admins.</p>
+    }
+    else
+    {
+        @foreach (ApplicationUser user in Model.Members)
+        {
+            <label>
+                <input type="checkbox" name="DeleteIds" value="@user.Id">
+                @user.UserName
+            </label>
+        }
+    }
+
+    <input type="submit" value="Save" />
+}

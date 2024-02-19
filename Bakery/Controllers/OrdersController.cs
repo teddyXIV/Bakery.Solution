@@ -39,6 +39,7 @@ public class OrdersController : Controller
         return View();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult> Create(Order order)
     {
@@ -72,6 +73,7 @@ public class OrdersController : Controller
         return View(order);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public ActionResult Edit(Order order)
     {
@@ -80,7 +82,7 @@ public class OrdersController : Controller
         return RedirectToAction("Details", new { id = order.OrderId });
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public ActionResult Delete(int id)
     {

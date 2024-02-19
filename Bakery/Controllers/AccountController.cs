@@ -79,17 +79,6 @@ public class AccountController : Controller
                     return View(model);
                 }
             }
-            // Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager
-            //    .PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
-            // if (result.Succeeded)
-            // {
-            //     return RedirectToAction("Index", "Home");
-            // }
-            // else
-            // {
-            //     ModelState.AddModelError("", "There is something wrong with your email or password. Please try again.");
-            //     return View(model);
-            // }
         }
         return View(model);
     }
@@ -99,5 +88,10 @@ public class AccountController : Controller
     {
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 }
